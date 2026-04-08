@@ -9,6 +9,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   const [showToast, setShowToast] = useState(false);
   const [jumpCart, setJumpCart] = useState(false);
@@ -25,6 +26,14 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -45,7 +54,21 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans selection:bg-emerald-200 dark:selection:bg-emerald-500/30 transition-colors duration-300">
+    <div className="min-h-screen font-sans selection:bg-emerald-200 dark:selection:bg-emerald-500/30 transition-colors duration-300 relative">
+      {/* Background Character */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden"
+        style={{
+          opacity: Math.max(0, 1 - scrollY / 600)
+        }}
+      >
+        <img 
+          src="/Logos/Monito.png" 
+          alt="Monito Background" 
+          className="w-[120vw] sm:w-[80vw] md:w-[60vw] lg:w-[40vw] max-w-2xl h-auto object-contain opacity-10 dark:opacity-5 grayscale-[20%]"
+        />
+      </div>
+
       {/* Menu Lateral Ovelay */}
       {isMenuOpen && (
         <div 
