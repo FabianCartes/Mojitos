@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { mojitosData } from './data';
 import MojitoCard from './components/MojitoCard';
 import Cart from './components/Cart';
@@ -9,6 +9,11 @@ function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [showToast, setShowToast] = useState(false);
+  const [jumpCart, setJumpCart] = useState(false);
+  const toastTimerRef = useRef(null);
+  const jumpTimerRef = useRef(null);
 
   // Dark Mode State defaults to false to force Light Mode
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -28,6 +33,15 @@ function App() {
 
   const handleAddToCart = (item) => {
     setCart((prev) => [...prev, item]);
+    
+    setShowToast(true);
+    setJumpCart(true);
+    
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    if (jumpTimerRef.current) clearTimeout(jumpTimerRef.current);
+    
+    toastTimerRef.current = setTimeout(() => setShowToast(false), 2500);
+    jumpTimerRef.current = setTimeout(() => setJumpCart(false), 400);
   };
 
   return (
@@ -86,14 +100,18 @@ function App() {
             {/* Cart Button */}
             <button 
               onClick={() => setIsCartOpen(true)}
-              className="cursor-pointer relative p-3 rounded-full bg-slate-50 dark:bg-stone-900 border border-slate-200 dark:border-stone-800 hover:border-emerald-300 dark:hover:border-stone-700 hover:bg-emerald-50 dark:hover:bg-stone-800 transition-colors group"
+              className={`cursor-pointer relative p-3 rounded-full border transition-all duration-300 group
+                ${cart.length > 0 && !jumpCart ? 'animate-bounce border-emerald-400 dark:border-emerald-500 bg-emerald-50 dark:bg-stone-800 shadow-md hover:border-emerald-500 hover:bg-emerald-100' : ''}
+                ${cart.length === 0 && !jumpCart ? 'border-slate-200 dark:border-stone-800 bg-slate-50 dark:bg-stone-900 hover:border-emerald-300 hover:bg-emerald-50 dark:hover:bg-stone-800' : ''}
+                ${jumpCart ? 'scale-[1.3] -translate-y-4 rotate-[15deg] shadow-xl bg-emerald-200 dark:bg-emerald-800 border-emerald-500' : ''}
+              `}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-700 dark:text-stone-300 transition-colors group-hover:text-emerald-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-700 dark:text-stone-300 transition-colors group-hover:text-emerald-600">
                 <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
               </svg>
               {cart.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-rose-500 text-white text-[11px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-white dark:border-stone-950 shadow-md">
+                <span className={`absolute -top-2 -right-2 bg-rose-500 text-white text-[11px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-white dark:border-stone-950 shadow-md transition-all ${jumpCart ? 'scale-125 bg-amber-500' : ''}`}>
                   {cart.length}
                 </span>
               )}
@@ -158,6 +176,16 @@ function App() {
         cart={cart}
         setCart={setCart}
       />
+
+      {/* Toast Notification */}
+      <div 
+        className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 bg-emerald-600 dark:bg-emerald-500 text-white font-bold rounded-full shadow-2xl transition-all duration-300 flex items-center gap-2 pointer-events-none origin-bottom
+        ${showToast ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'}
+        `}
+      >
+        <span className="text-xl">🛒</span> 
+        ¡Agregado al carrito!
+      </div>
     </div>
   );
 }
