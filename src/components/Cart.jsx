@@ -16,6 +16,16 @@ export default function Cart({ isOpen, onClose, cart, setCart }) {
     }
   }, [hasFreeDeliveryPromo]);
 
+  // Prevenir scroll del fondo (scroll bleed) en móviles
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => { document.body.style.overflow = "unset"; };
+  }, [isOpen]);
+
   const [itemToDelete, setItemToDelete] = useState(null);
 
   const confirmRemove = () => {
