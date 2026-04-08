@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-mojito-caribe: #06b6d4; /* cyan-500 */
+  --color-mojito-frambuesa: #ec4899; /* pink-500 */
+  --color-mojito-frutilla: #ef4444; /* red-500 */
+  --color-mojito-bosque: #8b5cf6; /* violet-500 */
+  --color-mojito-mango: #f59e0b; /* amber-500 */
+  --color-mojito-maracuya: #fbbf24; /* amber-400 */
+  --color-mojito-tradicional: #10b981; /* emerald-500 */
+  
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+body {
+  background-color: #ffffff; /* Blanco absoluto */
+  color: #1e293b;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Base styles for dark mode */
+.dark body {
+  background-color: #0c0a09; /* stone-950 */
+  color: #f5f5f4; /* stone-100 */
+}
+
+/* Animations for Mobile and Desktop interaction */
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes fadeInOverlay {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-modal-pop {
+  animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeInOverlay 0.3s ease-out forwards;
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-10px) scaleY(0.95); }
+  100% { opacity: 1; transform: translateY(0) scaleY(1); }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
