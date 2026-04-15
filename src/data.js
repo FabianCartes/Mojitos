@@ -61,7 +61,7 @@ export const mojitosData = [
   },
   {
     id: "caribe",
-    name: "Mojito Azul de Curazao",
+    name: "Mojito Caribe",
     description: "La magia azul de los mares caribeños en tu trago. Este emblemático mojito incorpora icónico Blue Curaçao original, inyectando vibrantes y mayores dulzores, con toques sutiles de corteza de naranja confitada y su famoso color azul cristalino envolvente que te invitará al caribe.",
     price: 8500,
     image: "/Foto_mojitos/Caribe-1L.png",

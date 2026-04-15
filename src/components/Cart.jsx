@@ -38,28 +38,28 @@ export default function Cart({ isOpen, onClose, cart, setCart }) {
     if (cart.length === 0) return;
     
     const phone = "56968976411";
-    let text = "🌴 *¡Hola! Quisiera realizar mi pedido de Mojitos:* \n\n";
+    let text = "\u{1F334} *¡Hola! Quisiera realizar mi pedido de Mojitos:* \n\n";
     
     cart.forEach(item => {
-      text += `🍹 1x ${item.name} (${item.alcoholLevel.label}) = $${item.finalPrice.toLocaleString("es-CL")}\n`;
+      text += `\u{1F379} 1x ${item.name} (${item.alcoholLevel.label}) = $${item.finalPrice.toLocaleString("es-CL")}\n`;
       if (item.description && item.description.startsWith("Sabores:")) {
-        text += `   ↳ ${item.description}\n`;
+        text += `   \u{21B3} ${item.description}\n`;
       }
     });
     
-    text += `\n📝 *Subtotal:* $${subtotal.toLocaleString("es-CL")}`;
+    text += `\n\u{1F4DD} *Subtotal:* $${subtotal.toLocaleString("es-CL")}`;
     if (isDelivery) {
       if (hasFreeDeliveryPromo) {
-        text += `\n🛵 *Reparto:* ¡GRATIS! 🎁`;
+        text += `\n\u{1F6F5} *Reparto:* ¡GRATIS! \u{1F381}`;
       } else {
-        text += `\n🛵 *Reparto:* $${deliveryFee.toLocaleString("es-CL")}`;
+        text += `\n\u{1F6F5} *Reparto:* $${deliveryFee.toLocaleString("es-CL")}`;
       }
-      text += `\n📍 *Método:* Envío a domicilio. Mándame tu dirección por acá por favor!`;
+      text += `\n\u{1F4CD} *Método:* Envío a domicilio. Mándame tu dirección por acá por favor!`;
     } else {
-      text += `\n🏡 *Método:* Retiro en el local (Villa Perales, pasaje el manzano, casa 25)`;
+      text += `\n\u{1F3E1} *Método:* Retiro en el local (Villa Perales, pasaje el manzano, casa 25)`;
     }
     
-    text += `\n\n💰 *Total a pagar:* $${total.toLocaleString("es-CL")}\n\n`;
+    text += `\n\n\u{1F4B0} *Total a pagar:* $${total.toLocaleString("es-CL")}\n\n`;
 
     text += `¡Quedo atento/a para coordinar!`;
 
