@@ -1,7 +1,55 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { mojitosData, alcoholLevels } from "../data";
 import CustomSelect from "./CustomSelect";
+
+const PromoParticles = ({ type }) => {
+  const particles = useMemo(() => {
+    const arr = [];
+    let colors = [];
+    if (type === 'promo-duo') {
+      colors = ['#3b82f6', '#60a5fa', '#93c5fd', '#2563eb']; // Azules
+    } else if (type === 'promo-trio') {
+      colors = ['#f97316', '#fb923c', '#fdba74', '#ea580c']; // Naranjas
+    } else {
+      colors = ['#ef4444', '#3b82f6', '#22c55e', '#a855f7', '#eab308']; // Multi colores
+    }
+    
+    for (let i = 0; i < 60; i++) {
+      arr.push({
+        x: Math.random() * 100,
+        y: Math.random() * 20 - 20, 
+        delay: Math.random() * 5,
+        duration: 4 + Math.random() * 4,
+        size: 3 + Math.random() * 6,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        opacity: 0.3 + Math.random() * 0.5
+      });
+    }
+    return arr;
+  }, [type]);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none z-0">
+      {particles.map((p, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full animate-falling-promo"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}px`,
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            backgroundColor: p.color,
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+            '--particle-opacity': p.opacity
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default function Promos({ onAddToCart }) {
   const [activePromo, setActivePromo] = useState(null);
@@ -121,8 +169,11 @@ export default function Promos({ onAddToCart }) {
           {promoList.map((promo) => (
             <div 
               key={promo.id} 
-              className="relative flex flex-col bg-white dark:bg-stone-900 border-2 border-slate-100 dark:border-stone-800 rounded-[2.5rem] p-8 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left"
+              className="relative flex flex-col bg-white dark:bg-stone-900 border-2 border-slate-100 dark:border-stone-800 rounded-[2.5rem] p-8 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left overflow-hidden"
             >
+              {/* Partículas animadas de fondo */}
+              <PromoParticles type={promo.id} />
+
               <div className="absolute -top-4 -right-4 w-32 h-32 rounded-full opacity-10 bg-gradient-to-br blur-3xl from-slate-400 to-slate-600 pointer-events-none" />
               
               <div className="z-10 relative flex-1 flex flex-col">

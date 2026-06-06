@@ -73,3 +73,24 @@ body {
 .animate-falling {
   animation: fallingLeaf linear infinite;
 }
+
+@keyframes fallingPromo {
+  0% { 
+    opacity: 0; 
+    transform: translateY(-20px) translateX(0) scale(1); 
+  }
+  20% { 
+    opacity: var(--particle-opacity, 0.6); 
+  }
+  80% { 
+    opacity: var(--particle-opacity, 0.6); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: translateY(350px) translateX(30px) scale(0.5); 
+  }
+}
+
+.animate-falling-promo {
+  animation: fallingPromo linear infinite;
+}
