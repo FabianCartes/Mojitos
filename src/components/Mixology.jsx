@@ -32,7 +32,7 @@ export default function Mixology({ onAddToCart }) {
   };
 
   return (
-    <section className="py-24 border-t border-slate-100 dark:border-stone-800 bg-white dark:bg-stone-950 relative overflow-hidden transition-colors duration-300">
+    <section className="py-24 relative overflow-hidden transition-colors duration-300">
       {/* Decorative tropical elements */}
       <div className={`absolute top-1/2 left-1/4 w-96 h-96 blur-[120px] dark:blur-[120px] rounded-full opacity-20 dark:opacity-20 pointer-events-none bg-gradient-to-r ${flavor1.textGradient}`} />
       <div className={`absolute top-1/2 right-1/4 w-96 h-96 blur-[120px] dark:blur-[120px] rounded-full opacity-20 dark:opacity-20 pointer-events-none bg-gradient-to-r ${flavor2.textGradient}`} />

@@ -13,7 +13,7 @@ export default function Promos({ onAddToCart }) {
       name: "Dúo Degustación",
       tagline: "¡ENVÍO GRATIS! 🔥",
       description: "2 Litros (sabores a elección). La gente rara vez toma sola un fin de semana. No te conformes con uno solo.",
-      oldPrice: 17000,
+      oldPrice: 18000,
       price: 16000,
       isFreeDelivery: true,
       gradient: "from-blue-500 to-indigo-600",
@@ -22,11 +22,11 @@ export default function Promos({ onAddToCart }) {
     {
       id: "promo-trio",
       name: "Trío La Previa",
-      tagline: "¡ENVÍO GRATIS! 🛵",
-      description: "3 Litros a elección. El gancho perfecto: te llevas el frasco extra, aseguras la sesión y te saltas el costo de despacho.",
-      oldPrice: 27500,
+      tagline: "Ideal para compartir 🛵",
+      description: "3 Litros a elección. El gancho perfecto: te llevas el frasco extra y aseguras la sesión.",
+      oldPrice: 24000,
       price: 22000,
-      isFreeDelivery: true,
+      isFreeDelivery: false,
       gradient: "from-amber-500 to-orange-500",
       flavorCount: 3,
     },
@@ -35,7 +35,7 @@ export default function Promos({ onAddToCart }) {
       name: "Full Color Pack",
       tagline: "¡ENVÍO GRATIS! 🌈",
       description: "Los 5 Litros (idealmente el arcoíris, pero tú decides los sabores). La barra completa en tu casa para una noche espectacular.",
-      oldPrice: 44500,
+      oldPrice: 42000,
       price: 40000,
       isFreeDelivery: true,
       gradient: "from-rose-500 to-pink-600",
@@ -107,7 +107,7 @@ export default function Promos({ onAddToCart }) {
   }, [activePromo]);
 
   return (
-    <section id="promociones" className="py-24 bg-slate-50 dark:bg-stone-950 border-t border-slate-100 dark:border-stone-800 transition-colors duration-300">
+    <section id="promociones" className="py-24 bg-[#f2f7e1]/50 dark:bg-[#11170a]/50 transition-colors duration-300">
       <div className="container mx-auto px-4 text-center max-w-6xl">
         
         <h3 className="text-4xl md:text-5xl font-black mb-4 text-slate-800 dark:text-white transition-colors duration-300">
