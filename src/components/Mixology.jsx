@@ -9,7 +9,7 @@ export default function Mixology({ onAddToCart }) {
   const [flavor2, setFlavor2] = useState(mixableFlavors[3]); // Mango
   const [selectedAlcohol, setSelectedAlcohol] = useState(alcoholLevels[2]); // Normal
 
-  const basePrice = 8500;
+  const basePrice = 8000;
   const currentPrice = basePrice + selectedAlcohol.modifier;
 
   const gradientStyle = useMemo(() => {
